@@ -6,217 +6,153 @@
   <title>ABS Testmail</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #0e0e0e; color: #fff; font-family: system-ui, sans-serif; min-height: 100vh; }
+    body { background: #0e0e0e; color: #fff; font-family: system-ui, sans-serif; min-height: 100vh; padding: 48px 24px; }
 
-    /* Login */
-    #login {
-      display: flex; align-items: center; justify-content: center;
-      min-height: 100vh; padding: 24px;
-    }
-    .card {
-      width: 100%; max-width: 360px;
-      background: #141414; border: 1px solid rgba(255,255,255,0.07);
-      padding: 40px 32px;
-    }
-    .logo { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
+    nav { display: flex; align-items: center; gap: 10px; margin-bottom: 48px; }
     .dot { width: 8px; height: 8px; border-radius: 50%; background: #cafd00; box-shadow: 0 0 10px #cafd00; }
-    .logo-text { font-size: 11px; font-weight: 900; font-style: italic; letter-spacing: 0.22em; text-transform: uppercase; }
-    h2 { font-size: 1.7rem; font-weight: 900; font-style: italic; letter-spacing: -0.03em; margin-bottom: 6px; }
-    h2 span { color: #cafd00; }
-    .sub { font-size: 12px; color: rgba(255,255,255,0.35); margin-bottom: 24px; }
-    input[type="password"] {
-      width: 100%; height: 48px; padding: 0 16px;
-      background: #1a1a1a; border: 1px solid rgba(255,255,255,0.07);
-      color: #fff; font-size: 14px; font-family: inherit;
-      outline: none; margin-bottom: 12px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    input[type="password"]:focus { border-color: #cafd00; box-shadow: 0 0 0 1px #cafd00; }
-    .btn {
-      width: 100%; height: 48px; background: #cafd00; color: #0e0e0e;
-      border: none; cursor: pointer;
-      font-size: 11px; font-weight: 900; font-style: italic;
-      letter-spacing: 0.25em; text-transform: uppercase;
-    }
-    .btn:hover { background: #d8ff1a; }
+    .brand { font-size: 11px; font-weight: 900; font-style: italic; letter-spacing: 0.22em; text-transform: uppercase; }
 
-    /* Inbox */
-    #inbox { display: none; padding: 48px 24px; }
-    .inbox-inner { max-width: 680px; margin: 0 auto; }
-    nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; }
-    .nav-left { display: flex; align-items: center; gap: 10px; }
-    .signout {
-      font-size: 10px; font-weight: 700; font-style: italic;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(255,255,255,0.3); background: none; border: none; cursor: pointer;
-    }
-    .signout:hover { color: #fff; }
-    h1 { font-size: 2rem; font-weight: 900; font-style: italic; letter-spacing: -0.03em; margin-bottom: 8px; }
+    .container { max-width: 680px; margin: 0 auto; }
+    h1 { font-size: clamp(1.6rem, 5vw, 2.4rem); font-weight: 900; font-style: italic; letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; }
     h1 span { color: #cafd00; }
-    .subtitle { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 28px; }
-    .row { display: flex; gap: 12px; margin-bottom: 28px; }
-    .wrap { flex: 1; position: relative; }
-    input[type="text"] {
+    .subtitle { font-size: 13px; color: rgba(255,255,255,0.4); letter-spacing: 0.02em; margin-bottom: 32px; }
+
+    .input-row { display: flex; gap: 12px; margin-bottom: 32px; }
+    .input-wrap { flex: 1; position: relative; }
+    input {
       width: 100%; height: 48px; padding: 0 16px;
       background: #1a1a1a; border: 1px solid rgba(255,255,255,0.07);
-      color: #fff; font-size: 14px; font-family: inherit; outline: none;
+      color: #fff; font-size: 14px; font-family: inherit; letter-spacing: 0.03em;
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
     }
-    input[type="text"]:focus { border-color: #cafd00; box-shadow: 0 0 0 1px #cafd00; }
+    input:focus { border-color: #cafd00; box-shadow: 0 0 0 1px #cafd00; }
     input::placeholder { color: rgba(255,255,255,0.25); }
-    .suffix { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 11px; color: rgba(255,255,255,0.25); pointer-events: none; }
-    .check-btn {
-      height: 48px; padding: 0 22px; background: #cafd00; color: #0e0e0e;
+    .suffix { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 12px; color: rgba(255,255,255,0.3); pointer-events: none; }
+    button {
+      height: 48px; padding: 0 24px; background: #cafd00; color: #0e0e0e;
       border: none; cursor: pointer;
       font-size: 11px; font-weight: 900; font-style: italic;
       letter-spacing: 0.2em; text-transform: uppercase;
+      transition: background 0.15s, box-shadow 0.15s;
     }
-    .check-btn:hover { background: #d8ff1a; }
-    .status-bar { display: flex; justify-content: space-between; margin-bottom: 16px; }
-    .status { font-size: 10px; font-weight: 900; font-style: italic; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+    button:hover { background: #d8ff1a; box-shadow: 0 0 20px rgba(202,253,0,0.35); }
+
+    .refresh-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .status { font-size: 10px; font-weight: 900; font-style: italic; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
     .status .addr { color: #cafd00; }
-    .tick-label { font-size: 10px; font-style: italic; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
-    .tick-label span { color: rgba(202,253,0,0.5); }
+    .countdown { font-size: 10px; font-style: italic; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
+    .countdown span { color: rgba(202,253,0,0.5); }
+
     .empty { padding: 48px 0; text-align: center; font-size: 13px; color: rgba(255,255,255,0.2); font-style: italic; }
-    .msg { border: 1px solid rgba(255,255,255,0.07); margin-bottom: 8px; }
-    .msg-head {
-      display: flex; align-items: center; gap: 14px;
-      padding: 14px 18px; background: #141414; cursor: pointer;
-    }
-    .msg-head:hover { background: #1a1a1a; }
-    .msg-from { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.65); flex: 0 0 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .msg-subj { font-size: 13px; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .msg-date { font-size: 10px; color: rgba(255,255,255,0.3); white-space: nowrap; font-style: italic; }
-    .chev { font-size: 10px; color: rgba(255,255,255,0.2); transition: transform 0.2s; }
-    .msg.open .chev { transform: rotate(180deg); }
-    .msg-body { display: none; padding: 20px 18px; background: #0e0e0e; border-top: 1px solid rgba(255,255,255,0.05); font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.7); }
-    .msg.open .msg-body { display: block; }
+    .message { border: 1px solid rgba(255,255,255,0.07); margin-bottom: 8px; }
+    .message:hover { border-color: rgba(255,255,255,0.13); }
+    .message-header { display: flex; align-items: center; gap: 16px; padding: 16px 20px; cursor: pointer; background: #141414; user-select: none; }
+    .message-header:hover { background: #1a1a1a; }
+    .msg-from { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.7); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 0 0 200px; }
+    .msg-subject { font-size: 13px; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .msg-date { font-size: 10px; color: rgba(255,255,255,0.3); font-style: italic; white-space: nowrap; flex-shrink: 0; }
+    .chevron { font-size: 10px; color: rgba(255,255,255,0.25); flex-shrink: 0; transition: transform 0.2s; }
+    .message.open .chevron { transform: rotate(180deg); }
+    .message-body { display: none; padding: 24px 20px; background: #0e0e0e; border-top: 1px solid rgba(255,255,255,0.05); font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.75); }
+    .message.open .message-body { display: block; }
+    .msg-body-html { max-width: 100%; overflow-x: auto; }
+    .msg-body-html a { color: #cafd00; }
   </style>
 </head>
 <body>
-
-<div id="login">
-  <div class="card">
-    <div class="logo"><div class="dot"></div><span class="logo-text">ABS Testmail</span></div>
-    <h2>ACCESS<br><span>REQUIRED.</span></h2>
-    <p class="sub">Enter your inbox token to continue.</p>
-    <input id="pw" type="password" placeholder="Paste token…" />
-    <button class="btn" onclick="login()">Enter →</button>
-  </div>
-</div>
-
-<div id="inbox">
-  <div class="inbox-inner">
+  <div class="container">
     <nav>
-      <div class="nav-left"><div class="dot"></div><span class="logo-text">ABS Performance Lab — Testmail</span></div>
-      <button class="signout" onclick="localStorage.clear(); location.reload()">Sign out</button>
+      <div class="dot"></div>
+      <span class="brand">ABS Performance Lab — Testmail</span>
     </nav>
+
     <h1>DISPOSABLE<br><span>INBOX.</span></h1>
     <p class="subtitle">Emails expire after 1 hour. Enter a prefix to check an inbox.</p>
-    <div class="row">
-      <div class="wrap">
+
+    <div class="input-row">
+      <div class="input-wrap">
         <input id="prefix" type="text" placeholder="e.g. member1" autocomplete="off" />
         <span class="suffix">@mail.absperformancelab.ca</span>
       </div>
-      <button class="check-btn" onclick="loadInbox()">Check</button>
+      <button onclick="loadInbox()">Check</button>
     </div>
+
     <div id="inbox-area" style="display:none">
-      <div class="status-bar">
-        <div class="status">Inbox: <span class="addr" id="cur-addr"></span></div>
-        <div class="tick-label">Refreshing in <span id="tick">5</span>s</div>
+      <div class="refresh-bar">
+        <div class="status">Inbox: <span class="addr" id="current-addr"></span></div>
+        <div class="countdown">Refreshing in <span id="tick">5</span>s</div>
       </div>
       <div id="messages"></div>
     </div>
   </div>
-</div>
 
-<script>
-  var token = localStorage.getItem('inbox_token');
-  if (token) {
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('inbox').style.display = 'block';
-  }
+  <script>
+    var currentPrefix = '';
+    var countdown = 5;
+    var timer = null;
 
-  document.getElementById('pw').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') login();
-  });
+    document.getElementById('prefix').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') loadInbox();
+    });
 
-  function login() {
-    var t = document.getElementById('pw').value.trim();
-    if (!t) return;
-    localStorage.setItem('inbox_token', t);
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('inbox').style.display = 'block';
-  }
+    function loadInbox() {
+      var val = document.getElementById('prefix').value.trim().toLowerCase();
+      if (!val) return;
+      currentPrefix = val;
+      document.getElementById('current-addr').textContent = val + '@mail.absperformancelab.ca';
+      document.getElementById('inbox-area').style.display = 'block';
+      fetchMessages();
+      startCountdown();
+    }
 
-  var currentPrefix = '';
-  var tickVal = 5;
-  var tickTimer = null;
+    function fetchMessages() {
+      if (!currentPrefix) return;
+      fetch('/api/inbox/' + encodeURIComponent(currentPrefix))
+        .then(function(r) { return r.json(); })
+        .then(function(msgs) { renderMessages(msgs); })
+        .catch(function(e) { console.error(e); });
+    }
 
-  document.getElementById('prefix').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') loadInbox();
-  });
+    function renderMessages(msgs) {
+      var el = document.getElementById('messages');
+      if (!msgs.length) { el.innerHTML = '<div class="empty">No messages yet. Waiting for email…</div>'; return; }
+      var open = new Set(Array.from(el.querySelectorAll('.message.open')).map(function(m) { return m.dataset.id; }));
+      el.innerHTML = msgs.map(function(m) {
+        return '<div class="message' + (open.has(m.MessageID) ? ' open' : '') + '" data-id="' + esc(m.MessageID) + '">' +
+          '<div class="message-header" onclick="toggle(this.parentElement)">' +
+            '<div class="msg-from">' + esc(m.From) + '</div>' +
+            '<div class="msg-subject">' + esc(m.Subject || '(no subject)') + '</div>' +
+            '<div class="msg-date">' + fmtDate(m.Date) + '</div>' +
+            '<div class="chevron">▼</div>' +
+          '</div>' +
+          '<div class="message-body">' +
+            (m.HtmlBody ? '<div class="msg-body-html">' + m.HtmlBody + '</div>' : '<pre style="white-space:pre-wrap">' + esc(m.TextBody || '') + '</pre>') +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
 
-  function loadInbox() {
-    var val = document.getElementById('prefix').value.trim().toLowerCase();
-    if (!val) return;
-    currentPrefix = val;
-    document.getElementById('cur-addr').textContent = val + '@mail.absperformancelab.ca';
-    document.getElementById('inbox-area').style.display = 'block';
-    fetchMessages();
-    startTick();
-  }
+    function toggle(el) { el.classList.toggle('open'); }
 
-  function fetchMessages() {
-    if (!currentPrefix) return;
-    fetch('/api/inbox/' + encodeURIComponent(currentPrefix), {
-      headers: { 'Authorization': 'Bearer ' + localStorage.getItem('inbox_token') }
-    })
-    .then(function(r) {
-      if (r.status === 401) { localStorage.clear(); location.reload(); return; }
-      return r.json();
-    })
-    .then(function(msgs) { if (msgs) render(msgs); })
-    .catch(function(e) { console.error(e); });
-  }
+    function esc(s) {
+      return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
 
-  function render(msgs) {
-    var el = document.getElementById('messages');
-    if (!msgs.length) { el.innerHTML = '<div class="empty">No messages yet. Waiting for email…</div>'; return; }
-    var open = new Set(Array.from(el.querySelectorAll('.msg.open')).map(function(m) { return m.dataset.id; }));
-    el.innerHTML = msgs.map(function(m) {
-      return '<div class="msg' + (open.has(m.MessageID) ? ' open' : '') + '" data-id="' + esc(m.MessageID) + '">' +
-        '<div class="msg-head" onclick="toggle(this.parentElement)">' +
-          '<div class="msg-from">' + esc(m.From) + '</div>' +
-          '<div class="msg-subj">' + esc(m.Subject || '(no subject)') + '</div>' +
-          '<div class="msg-date">' + fmtDate(m.Date) + '</div>' +
-          '<div class="chev">▼</div>' +
-        '</div>' +
-        '<div class="msg-body">' + (m.HtmlBody ? m.HtmlBody : '<pre style="white-space:pre-wrap">' + esc(m.TextBody || '') + '</pre>') + '</div>' +
-      '</div>';
-    }).join('');
-  }
+    function fmtDate(d) {
+      try { return new Date(d).toLocaleString('en-CA', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }); }
+      catch(e) { return d || ''; }
+    }
 
-  function toggle(el) { el.classList.toggle('open'); }
-
-  function esc(s) {
-    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  function fmtDate(d) {
-    try { return new Date(d).toLocaleString('en-CA', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' }); }
-    catch(e) { return d || ''; }
-  }
-
-  function startTick() {
-    if (tickTimer) clearInterval(tickTimer);
-    tickVal = 5;
-    document.getElementById('tick').textContent = tickVal;
-    tickTimer = setInterval(function() {
-      tickVal--;
-      document.getElementById('tick').textContent = tickVal;
-      if (tickVal <= 0) { tickVal = 5; fetchMessages(); }
-    }, 1000);
-  }
-</script>
+    function startCountdown() {
+      if (timer) clearInterval(timer);
+      countdown = 5;
+      document.getElementById('tick').textContent = countdown;
+      timer = setInterval(function() {
+        countdown--;
+        document.getElementById('tick').textContent = countdown;
+        if (countdown <= 0) { countdown = 5; fetchMessages(); }
+      }, 1000);
+    }
+  </script>
 </body>
 </html>
