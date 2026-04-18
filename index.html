@@ -12,24 +12,99 @@
       color: #fff;
       font-family: 'Inter', system-ui, sans-serif;
       min-height: 100vh;
-      padding: 48px 24px;
     }
 
-    nav {
+    /* ── Login ── */
+    #login-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .login-card {
+      width: 100%;
+      max-width: 380px;
+      background: #141414;
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 40px 32px;
+    }
+    .login-logo {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 48px;
+      margin-bottom: 32px;
     }
     .dot {
       width: 8px; height: 8px; border-radius: 50%;
       background: #cafd00;
       box-shadow: 0 0 10px #cafd00;
+      flex-shrink: 0;
     }
     .brand {
       font-size: 11px; font-weight: 900; font-style: italic;
       letter-spacing: 0.22em; text-transform: uppercase;
     }
+    .login-heading {
+      font-size: 1.6rem; font-weight: 900; font-style: italic;
+      letter-spacing: -0.03em; line-height: 1;
+      margin-bottom: 6px;
+    }
+    .login-heading span { color: #cafd00; }
+    .login-sub {
+      font-size: 12px; color: rgba(255,255,255,0.35);
+      letter-spacing: 0.03em; margin-bottom: 28px;
+    }
+    .login-input {
+      width: 100%; height: 48px; padding: 0 16px;
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.07);
+      color: #fff; font-size: 14px;
+      font-family: inherit; letter-spacing: 0.03em;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      margin-bottom: 12px;
+    }
+    .login-input:focus {
+      border-color: #cafd00;
+      box-shadow: 0 0 0 1px #cafd00;
+    }
+    .login-btn {
+      width: 100%; height: 48px;
+      background: #cafd00; color: #0e0e0e;
+      border: none; cursor: pointer;
+      font-size: 11px; font-weight: 900; font-style: italic;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      transition: background 0.15s, box-shadow 0.15s;
+    }
+    .login-btn:hover {
+      background: #d8ff1a;
+      box-shadow: 0 0 20px rgba(202,253,0,0.35);
+    }
+    .login-error {
+      font-size: 11px; color: #ff7070; font-style: italic;
+      letter-spacing: 0.04em; margin-top: 10px;
+      display: none;
+    }
+
+    /* ── App ── */
+    #app-screen { display: none; padding: 48px 24px; }
+
+    nav {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      margin-bottom: 48px;
+    }
+    .nav-left { display: flex; align-items: center; gap: 10px; }
+    .signout {
+      font-size: 10px; font-weight: 700; font-style: italic;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      background: none; border: none; cursor: pointer;
+      transition: color 0.15s;
+    }
+    .signout:hover { color: rgba(255,255,255,0.6); }
 
     .container { max-width: 680px; margin: 0 auto; }
 
@@ -40,19 +115,14 @@
       margin-bottom: 8px;
     }
     h1 span { color: #cafd00; }
-
     .subtitle {
       font-size: 13px; color: rgba(255,255,255,0.4);
       letter-spacing: 0.02em; margin-bottom: 32px;
     }
 
-    .input-row {
-      display: flex; gap: 12px; margin-bottom: 32px;
-    }
-    .input-wrap {
-      flex: 1; position: relative;
-    }
-    input {
+    .input-row { display: flex; gap: 12px; margin-bottom: 32px; }
+    .input-wrap { flex: 1; position: relative; }
+    input[type="text"] {
       width: 100%; height: 48px;
       background: #1a1a1a;
       border: 1px solid rgba(255,255,255,0.07);
@@ -61,7 +131,7 @@
       padding: 0 16px;
       outline: none; transition: border-color 0.2s, box-shadow 0.2s;
     }
-    input:focus {
+    input[type="text"]:focus {
       border-color: #cafd00;
       box-shadow: 0 0 0 1px #cafd00;
     }
@@ -72,8 +142,7 @@
       font-size: 12px; color: rgba(255,255,255,0.3);
       pointer-events: none;
     }
-
-    button {
+    button.check-btn {
       height: 48px; padding: 0 24px;
       background: #cafd00; color: #0e0e0e;
       border: none; cursor: pointer;
@@ -81,7 +150,7 @@
       letter-spacing: 0.2em; text-transform: uppercase;
       transition: background 0.15s, box-shadow 0.15s;
     }
-    button:hover {
+    button.check-btn:hover {
       background: #d8ff1a;
       box-shadow: 0 0 20px rgba(202,253,0,0.35);
     }
@@ -89,11 +158,9 @@
     .status {
       font-size: 10px; font-weight: 900; font-style: italic;
       letter-spacing: 0.25em; text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
-      margin-bottom: 16px;
+      color: rgba(255,255,255,0.25); margin-bottom: 16px;
     }
     .status .addr { color: #cafd00; }
-
     .empty {
       padding: 48px 0; text-align: center;
       font-size: 13px; color: rgba(255,255,255,0.2);
@@ -102,19 +169,15 @@
 
     .message {
       border: 1px solid rgba(255,255,255,0.07);
-      margin-bottom: 8px;
-      transition: border-color 0.15s;
+      margin-bottom: 8px; transition: border-color 0.15s;
     }
     .message:hover { border-color: rgba(255,255,255,0.13); }
-
     .message-header {
       display: flex; align-items: center; gap: 16px;
       padding: 16px 20px; cursor: pointer;
-      background: #141414;
-      user-select: none;
+      background: #141414; user-select: none;
     }
     .message-header:hover { background: #1a1a1a; }
-
     .msg-from {
       font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.7);
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -135,7 +198,6 @@
       flex-shrink: 0; transition: transform 0.2s;
     }
     .message.open .chevron { transform: rotate(180deg); }
-
     .message-body {
       display: none; padding: 24px 20px;
       background: #0e0e0e;
@@ -144,7 +206,6 @@
       color: rgba(255,255,255,0.75);
     }
     .message.open .message-body { display: block; }
-
     .msg-body-html { max-width: 100%; overflow-x: auto; }
     .msg-body-html a { color: #cafd00; }
 
@@ -161,37 +222,108 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <nav>
-      <div class="dot"></div>
-      <span class="brand">ABS Performance Lab — Testmail</span>
-    </nav>
 
-    <h1>DISPOSABLE<br><span>INBOX.</span></h1>
-    <p class="subtitle">Emails expire after 1 hour. Enter a prefix to check an inbox.</p>
-
-    <div class="input-row">
-      <div class="input-wrap">
-        <input id="prefix" type="text" placeholder="e.g. member1" autocomplete="off" />
-        <span class="suffix">@mail.absperformancelab.ca</span>
+  <!-- ── Login Screen ── -->
+  <div id="login-screen">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="dot"></div>
+        <span class="brand">ABS Testmail</span>
       </div>
-      <button onclick="loadInbox()">Check</button>
+      <h2 class="login-heading">ACCESS<br><span>REQUIRED.</span></h2>
+      <p class="login-sub">Enter the inbox token to continue.</p>
+      <input id="token-input" class="login-input" type="password"
+             placeholder="Paste token…" autocomplete="off" />
+      <button class="login-btn" onclick="doLogin()">Enter →</button>
+      <div id="login-error" class="login-error">◆ Invalid token. Try again.</div>
     </div>
+  </div>
 
-    <div id="inbox-area" style="display:none">
-      <div class="refresh-bar">
-        <div class="status">Inbox: <span class="addr" id="current-addr"></span></div>
-        <div class="countdown">Refreshing in <span class="tick" id="tick">5</span>s</div>
+  <!-- ── App Screen ── -->
+  <div id="app-screen">
+    <div class="container">
+      <nav>
+        <div class="nav-left">
+          <div class="dot"></div>
+          <span class="brand">ABS Performance Lab — Testmail</span>
+        </div>
+        <button class="signout" onclick="signOut()">Sign out</button>
+      </nav>
+
+      <h1>DISPOSABLE<br><span>INBOX.</span></h1>
+      <p class="subtitle">Emails expire after 1 hour. Enter a prefix to check an inbox.</p>
+
+      <div class="input-row">
+        <div class="input-wrap">
+          <input id="prefix" type="text" placeholder="e.g. member1" autocomplete="off" />
+          <span class="suffix">@mail.absperformancelab.ca</span>
+        </div>
+        <button class="check-btn" onclick="loadInbox()">Check</button>
       </div>
-      <div id="messages"></div>
+
+      <div id="inbox-area" style="display:none">
+        <div class="refresh-bar">
+          <div class="status">Inbox: <span class="addr" id="current-addr"></span></div>
+          <div class="countdown">Refreshing in <span class="tick" id="tick">5</span>s</div>
+        </div>
+        <div id="messages"></div>
+      </div>
     </div>
   </div>
 
   <script>
+    const TOKEN_KEY = 'inbox_token';
     let currentPrefix = '';
     let countdown = 5;
     let timer = null;
 
+    // ── Boot ──
+    (function init() {
+      if (localStorage.getItem(TOKEN_KEY)) showApp();
+      else showLogin();
+    })();
+
+    function showLogin() {
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('app-screen').style.display = 'none';
+    }
+    function showApp() {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app-screen').style.display = 'block';
+    }
+
+    // ── Login ──
+    document.getElementById('token-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') doLogin();
+    });
+
+    async function doLogin() {
+      const token = document.getElementById('token-input').value.trim();
+      if (!token) return;
+      // Validate token against the API before storing
+      const res = await fetch('/api/inbox/_auth_check', {
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      if (res.status === 401) {
+        document.getElementById('login-error').style.display = 'block';
+        return;
+      }
+      document.getElementById('login-error').style.display = 'none';
+      localStorage.setItem(TOKEN_KEY, token);
+      showApp();
+    }
+
+    function signOut() {
+      localStorage.removeItem(TOKEN_KEY);
+      if (timer) clearInterval(timer);
+      currentPrefix = '';
+      document.getElementById('inbox-area').style.display = 'none';
+      document.getElementById('prefix').value = '';
+      document.getElementById('token-input').value = '';
+      showLogin();
+    }
+
+    // ── Inbox ──
     document.getElementById('prefix').addEventListener('keydown', e => {
       if (e.key === 'Enter') loadInbox();
     });
@@ -208,8 +340,12 @@
 
     async function fetchMessages() {
       if (!currentPrefix) return;
+      const token = localStorage.getItem(TOKEN_KEY);
       try {
-        const res = await fetch(`/api/inbox/${encodeURIComponent(currentPrefix)}`);
+        const res = await fetch(`/api/inbox/${encodeURIComponent(currentPrefix)}`, {
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+        if (res.status === 401) { signOut(); return; }
         const msgs = await res.json();
         renderMessages(msgs);
       } catch (e) {
@@ -223,7 +359,6 @@
         el.innerHTML = '<div class="empty">No messages yet. Waiting for email…</div>';
         return;
       }
-      // Preserve open state
       const open = new Set([...el.querySelectorAll('.message.open')].map(m => m.dataset.id));
       el.innerHTML = msgs.map(m => `
         <div class="message${open.has(m.MessageID) ? ' open' : ''}" data-id="${esc(m.MessageID)}">

@@ -1,4 +1,8 @@
 {
+  "env": {
+    "INBOX_SECRET": "@inbox_secret",
+    "REDIS_URL": "@redis_url"
+  },
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
