@@ -1,7 +1,5 @@
 {
   "rewrites": [
-    { "source": "/api/inbound", "destination": "/api/inbound" },
-    { "source": "/api/inbox/:address", "destination": "/api/inbox/[address]" },
-    { "source": "/(.*)", "destination": "/public/index.html" }
+    { "source": "/((?!api/).*)", "destination": "/public/index.html" }
   ]
 }
