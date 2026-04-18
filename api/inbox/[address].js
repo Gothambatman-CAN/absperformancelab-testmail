@@ -1,5 +1,5 @@
-import { getRedis } from '../../lib/redis.js';
-export default async function handler(req, res) {
+const { getRedis } = require('../../lib/redis.js');
+module.exports = async function handler(req, res) {
   const { address } = req.query;
   const redis = await getRedis();
   const keys = await redis.keys(`inbox:${address.toLowerCase()}:*`);
